@@ -60,11 +60,14 @@ body {
 	display: grid;
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: auto 3fr 1fr;
+	grid-template-areas:
+		"picture author icon"
+		"picture publish icon";
 	margin: 52px 32px 20px 32px;
 }
 
 .footer__author-pic {
-	grid-area: span 2 / 1 / auto / auto;
+	grid-area: picture;
 	align-self: end;
 	margin-right: 16px;
 }
@@ -76,7 +79,7 @@ body {
 	letter-spacing: 0.12187500298023224px;
 	color: #48556a;
 
-	grid-area: 1 / 2 / auto / auto;
+	grid-area: author;
 	align-self: end;
 }
 
@@ -87,20 +90,19 @@ body {
 	letter-spacing: 0.12187500298023224px;
 	color: #9daec2;
 
-	grid-area: 2 / 2 / auto / auto;
+	grid-area: publish;
 }
 
 .footer__share-icon {
+	z-index: 110;
 	background: #ecf2f8;
 	width: 32px;
 	height: 32px;
 	border-radius: 50%;
-	grid-area: span 2 / -1 / auto / auto;
+	grid-area: icon;
 	align-self: center;
-}
-
-.share-icon {
-	margin: 9px 8px 10px 9px;
+	justify-self: end;
+	cursor: pointer;
 }
 
 .footer__share-icon:hover {
@@ -109,6 +111,44 @@ body {
 
 .footer__share-icon:hover * {
 	fill: #fff;
+}
+
+.share-icon {
+	z-index: 120;
+	margin: 9px 8px 10px 9px;
+}
+
+.footer__share-panel {
+	grid-area: picture-start / picture-start / icon-end / icon-end;
+	background: #48556a;
+	z-index: 100;
+	display: flex;
+	visibility: hidden;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	margin: 0 -32px -20px -32px;
+	align-items: center;
+}
+
+.footer__share-panel > h2 {
+	letter-spacing: 5px;
+	color: #9daec2;
+	font-style: normal;
+	font-weight: 200;
+	font-size: 13px;
+	line-height: 20px;
+	text-transform: uppercase;
+	margin-left: 32px;
+}
+
+.footer__share-panel > a {
+	display: flex;
+	align-items: center;
+	margin-left: 16px;
+}
+
+.footer__share-panel > a > svg:hover * {
+	fill: #6e8098;
 }
 
 .attribution {
@@ -122,6 +162,27 @@ body {
 
 .attribution a {
 	color: hsl(228, 45%, 44%);
+}
+
+.u-show {
+	visibility: visible;
+}
+
+.u-active {
+	background: #6e8098;
+	margin-bottom: -20px;
+}
+
+.u-active * {
+	fill: #fff;
+}
+
+.u-active:hover {
+	background: #ecf2f8;
+}
+
+.u-active:hover * {
+	fill: #6e8098;
 }
 
 @media only screen and (min-width: 1440px) {
@@ -163,5 +224,34 @@ body {
 
 	.article-preview__footer {
 		margin: 20px 40px 32px 40px;
+	}
+
+	.footer__share-panel {
+		width: 248px;
+		height: 55px;
+		justify-content: center;
+		border-radius: 10px;
+		position: relative;
+		left: 256px;
+		bottom: 80px;
+	}
+
+	.footer__share-panel::after {
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		background-color: #48556a;
+		left: 115px;
+		bottom: -10px;
+		content: "";
+		transform: rotate(45deg);
+	}
+
+	.footer__share-panel > h2 {
+		margin-left: 0px;
+	}
+
+	.u-active {
+		margin-bottom: 0px;
 	}
 }
